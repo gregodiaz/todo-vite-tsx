@@ -28,6 +28,12 @@ function App(): JSX.Element {
     setTasks(allTasks)
   }
 
+  const deleteTask = (i: number): void => {
+    const allTasks: ITask[] = [...tasks]
+    allTasks.splice(i, 1)
+    setTasks(allTasks)
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -47,6 +53,7 @@ function App(): JSX.Element {
             <h1 style={{ textDecoration: task.done ? 'line-through' : '' }}>{task.name}</h1>
             <div>
               <button onClick={() => toggleTask(i)} >{task.done ? '✗' : '✓'}</button>
+              <button onClick={() => deleteTask(i)} >{'🗑'}</button>
             </div>
           </div>
         ))
