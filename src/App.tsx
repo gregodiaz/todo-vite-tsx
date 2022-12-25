@@ -18,8 +18,14 @@ function App(): JSX.Element {
   }
 
   const addTask = (name: string): void => {
-    const updatedTask = [...tasks, { name, done: false }]
-    setTasks(updatedTask)
+    const updatedTasks: ITask[] = [...tasks, { name, done: false }]
+    setTasks(updatedTasks)
+  }
+
+  const toggleTask = (i: number): void => {
+    const allTasks: ITask[] = [...tasks]
+    allTasks[i].done = !allTasks[i].done
+    setTasks(allTasks)
   }
 
   return (
@@ -38,7 +44,10 @@ function App(): JSX.Element {
       {
         tasks.map((task: ITask, i: number) => (
           <div key={i}>
-            {task.name}
+            <h1 style={{ textDecoration: task.done ? 'line-through' : '' }}>{task.name}</h1>
+            <div>
+              <button onClick={() => toggleTask(i)} >{task.done ? '✗' : '✓'}</button>
+            </div>
           </div>
         ))
       }
